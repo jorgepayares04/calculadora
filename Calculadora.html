@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Calculadora en Javascript</title>
+  </head>
+  <body>
+      <div style="text-align: center; width: 1280px; padding: 200px;">
+      <h1>Calculadora</h1>
+    <input type="text" id="resultado" readonly><br><br>
+
+    <button onclick="agregarNumero('1')">1</button>
+    <button onclick="agregarNumero('2')">2</button>
+    <button onclick="agregarNumero('3')">3</button>
+    <button style="color: darkgray" onclick="operacion('+')">+</button><br>
+
+    <button onclick="agregarNumero('4')">4</button>
+    <button onclick="agregarNumero('5')">5</button>
+    <button onclick="agregarNumero('6')">6</button>
+    <button onclick="operacion('-')">-</button><br>
+
+    <button onclick="agregarNumero('7')">7</button>
+    <button onclick="agregarNumero('8')">8</button>
+    <button onclick="agregarNumero('9')">9</button>
+    <button onclick="operacion('*')">*</button><br>
+
+    <button onclick="agregarNumero('0')">0</button>
+    <button onclick="borrar()">C</button>
+    <button onclick="calcular()">=</button>
+    <button onclick="operacion('/')">/</button><br>
+
+    <script>
+      let num1 = '';
+      let num2 = '';
+      let operacionActual = '';
+      let resultado = document.getElementById('resultado');
+
+      function agregarNumero(numero) {
+        if (operacionActual === '') {
+          num1 += numero;
+          resultado.value = num1;
+        } else {
+          num2 += numero;
+          resultado.value = num2;
+        }
+      }
+
+      function operacion(operacion) {
+        if (num1 !== '') {
+          operacionActual = operacion;
+        }
+      }
+
+      function calcular() {
+        if (num1 !== '' && num2 !== '') {
+          let resultadoFinal = 0;
+          switch (operacionActual) {
+            case '+':
+              resultadoFinal = parseInt(num1) + parseInt(num2);
+              break;
+            case '-':
+              resultadoFinal = parseInt(num1) - parseInt(num2);
+              break;
+            case '*':
+              resultadoFinal = parseInt(num1) * parseInt(num2);
+              break;
+            case '/':
+              resultadoFinal = parseInt(num1) / parseInt(num2);
+              break;
+          }
+          resultado.value = resultadoFinal;
+          num1 = resultadoFinal.toString();
+          num2 = '';
+          operacionActual = '';
+        }
+      }
+
+      function borrar() {
+        num1 = '';
+        num2 = '';
+        operacionActual = '';
+        resultado.value = '';
+      }
+    </script>
+      
+      
+      </div>
+  </body>
+</html>
